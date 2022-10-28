@@ -6,9 +6,11 @@ using UnityEngine.AI;
 public class randomKarakterAI : MonoBehaviour
 {
     public static randomKarakterAI instance;
+    private Animator animator;
+    public bool isSitting;
+
 
     NavMeshAgent agent;
-
 
 
     private void Awake()
@@ -17,13 +19,18 @@ public class randomKarakterAI : MonoBehaviour
         {
             instance = this;
         }
-
+        isSitting = false;
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+
+  
+
+        
     }
 
     private void Update()
     {
-        print(GameController.instance.imdat);
+        //print(GameController.instance.imdat);
         if (Car.instance.isParked)
         {
             if (GameController.instance.imdat)
@@ -31,16 +38,62 @@ public class randomKarakterAI : MonoBehaviour
             else if (!GameController.instance.imdat)
                 SagSedye();
         }
+
+        
     }
 
-    private void SolSedye() 
+    private void SagSedye() 
     {
-        agent.SetDestination(new Vector3(-1.06f, 2.03f, -28.95f));
+        if (!isSitting)
+        {
+            agent.SetDestination(new Vector3(-1.06f, 2.03f, -28.95f));
+        }
+        else
+        {
+            agent.ResetPath();
+        }
     }
 
-    private void SagSedye()
+    private void SolSedye()
     {
-        agent.SetDestination(new Vector3(3.556f, 2.69f, -28.734f));
+        if (!isSitting)
+        {
+            agent.SetDestination(new Vector3(5f, 1.3f, -25.734f));
+        }
+        else
+        {
+            agent.ResetPath();
+        }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "SedyeTrigger")
+        {
+            print("sað sedye");
+
+            isSitting = true;
+            gameObject.transform.position = other.transform.position;
+            gameObject.transform.rotation = other.transform.rotation;
+
+
+            animator.SetBool("isSitting", true);
+
+
+
+        }
+        if (other.tag == "SedyeTrigger2")
+        {
+            print("sol sedye");
+            isSitting = true;
+            gameObject.transform.position = other.transform.position;
+            gameObject.transform.rotation = other.transform.rotation;
+
+            
+            animator.SetBool("isSitting", true);
+            
+        }
+    }
+
 }
 

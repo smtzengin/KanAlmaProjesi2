@@ -16,7 +16,6 @@ public class PlayerController : MonoBehaviour
     public Transform movePosition;
 
 
-    public GameObject asd;
 
     float horizontalInput;
     float verticalInput;
@@ -54,7 +53,7 @@ public class PlayerController : MonoBehaviour
         SpeedControl();
 
 
-        //Instantiate(asd, this.gameObject.transform.position, Quaternion.identity);
+
     }
 
     
@@ -74,11 +73,7 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
     }
 
-    //private void MovePlayer()
-    //{
-    //    moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
-    //    rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-    //}
+   
 
     private void SpeedControl()
     {
@@ -100,9 +95,5 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    /*
-     * 
-     * 
-     * 
-     */
+    
 }
