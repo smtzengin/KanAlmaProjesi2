@@ -26,7 +26,7 @@ public class Car : MonoBehaviour
     {
         ParkEt();       
     }
-
+ 
     public void ParkEt()
     {
         if (!isParked)

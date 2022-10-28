@@ -23,13 +23,13 @@ public class CameraFollow : MonoBehaviour
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
-        yRotation += mouseX;
-        xRotation -= mouseY;
+        //yRotation += PlayerController.instance.gameObject.transform.rotation.y;
+        //xRotation -= PlayerController.instance.gameObject.transform.rotation.x;
 
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        //xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        //transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+        //orientation.rotation = Quaternion.Euler(0, yRotation, 0);
 
     }
 }
