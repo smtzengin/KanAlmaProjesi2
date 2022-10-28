@@ -7,13 +7,8 @@ public class randomKarakterAI : MonoBehaviour
 {
     public static randomKarakterAI instance;
 
-
     NavMeshAgent agent;
-    public GameObject sedyeTransform;
-    public GameObject agentTarget;
-    private Vector3 agentTargetVector;
-    public bool firstAgentIsOnTarget = false;
-    public GameObject FirstAgent;
+
 
 
     private void Awake()
@@ -22,65 +17,30 @@ public class randomKarakterAI : MonoBehaviour
         {
             instance = this;
         }
-        else if (instance != null)
-        {
-            Destroy(gameObject);
-        }
-    }
 
-    private void Start()
-    {
-        firstAgentIsOnTarget = false;
         agent = GetComponent<NavMeshAgent>();
-        agentTargetVector = agentTarget.gameObject.transform.position; 
-
-
-
-        sedyeTransform = Resources.Load("SedyeDeneme") as GameObject;
     }
 
     private void Update()
     {
-
-        if (!firstAgentIsOnTarget)
-        {
-            
-            if (agent.SetDestination(agentTargetVector))
-            {
-                firstAgentIsOnTarget = true;
-            }
-        }
-        
+        print(GameController.instance.imdat);
         if (Car.instance.isParked)
         {
-            agent.SetDestination(agentTargetVector);
+            if (GameController.instance.imdat)
+                SolSedye();
+            else if (!GameController.instance.imdat)
+                SagSedye();
         }
-            
+    }
+
+    private void SolSedye() 
+    {
+        agent.SetDestination(new Vector3(-1.06f, 2.03f, -28.95f));
+    }
+
+    private void SagSedye()
+    {
+        agent.SetDestination(new Vector3(3.556f, 2.69f, -28.734f));
     }
 }
 
-/*
- * 
- * 
- * kanka soyle yaoiom ba k= simdi
- * gelcek dududududu 1sn AAYNII AMKKKKKK YOK YOK TIPA TIP AYNI .DAN SONRAKI 3 HANESI DE AYNI
- * sonra
- * ayynen
- * ama navmeshle
- * gidicez HAD' G'T SN BEN YAPCAMEYWWOKI
- * joystick fln
- * yok          ayni deil ki
- * sonraaa
- * he
- * niedeniiom suan
- * o da olur bi denim 
- * ama suan sey oluyo
- * 
- * 
- * lan bi dk he yok yok
- * o zaten
- * targetin vecytoru
- * sedyenin
- * 
- * 
- * */

@@ -4,25 +4,45 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public static GameController instance;
+
+
     public GameObject kapaliTir;
     public GameObject acikTir;
     public GameObject sedye1;
     public GameObject sedye2;
     public GameObject karakter;
     public GameObject karakterSpawn;
+    private GameObject NPC;
+    public GameObject NPC2;
+    public GameObject NPC3;
+    public GameObject NPC4;
     public bool isKarakterSpawned;
+    public int randomNumber;
+    public bool imdat = true;
 
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != null)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
         isKarakterSpawned = false;
-        karakter = Resources.Load("randomKarakter") as GameObject;
     }
 
     private void Update()
     {
         TiriAc();
-        SpawnCharacter();
+
     }
 
     public void TiriAc()
@@ -40,10 +60,33 @@ public class GameController : MonoBehaviour
 
     public void SpawnCharacter()
     {
-        if(Car.instance.isParked && PlayerController.instance.isSedyeTriggered)
+        Destroy(NPC);
+
+        randomNumber = Random.Range(1, 4);
+
+        
+
+        if (randomNumber % 4 == 1)
         {
-            Instantiate(Resources.Load("randomKarakter") as GameObject, karakterSpawn.transform.position, Quaternion.identity);
-            isKarakterSpawned = true;
+            NPC = Instantiate(NPC2, karakterSpawn.transform.position, Quaternion.identity);
         }
+        
+        else if (randomNumber % 4 == 2)
+        {
+            NPC = Instantiate(NPC3, karakterSpawn.transform.position, Quaternion.identity);
+        }
+
+        else if (randomNumber % 4 == 3)
+        {
+            NPC = Instantiate(NPC4, karakterSpawn.transform.position, Quaternion.identity);
+        }
+
+
+        if (imdat)
+            imdat = false;
+        else
+            imdat = true;
+
+        
     }
 }

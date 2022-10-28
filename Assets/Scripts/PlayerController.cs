@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public Transform movePosition;
 
 
+    public GameObject asd;
+
     float horizontalInput;
     float verticalInput;
 
@@ -46,19 +48,21 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    private void Update()
+    private void Update() 
     {
         MyInput();
         SpeedControl();
+
+
+        //Instantiate(asd, this.gameObject.transform.position, Quaternion.identity);
     }
+
+    
     private void FixedUpdate()
     {
-        if(randomKarakterAI.instance.firstAgentIsOnTarget)
+        if (Car.instance.isParked)
         {
-            //MovePlayer();
-
             PlayerAgent.SetDestination(movePosition.position);
-
         }
     }
 
@@ -98,20 +102,6 @@ public class PlayerController : MonoBehaviour
 
     /*
      * 
-     * HG
-     * micim calismio
-     * alo
-     * 1 sn
-     * bida solesene duymadim
-     * konusmaiom hu
-     * AMKKKKKKKKK SAMEEETTT
-     * ABIII
-     * CANVASIN TERSINDE YAPMISIZ DUNYAIY
-     * BAK BI BAK BAAKK
-     * ABI TAMAM BU BOYE OLR CUNKU EKRANA ETKILESIO DIREKT
-     * AMA BAK SIMDI
-     * HEEE XD
-     * SACMALIO OLEBU BUUMESIN ISYIOM
      * 
      * 
      */
