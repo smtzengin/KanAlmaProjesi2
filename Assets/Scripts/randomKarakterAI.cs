@@ -46,7 +46,7 @@ public class randomKarakterAI : MonoBehaviour
     {
         if (!isSitting)
         {
-            agent.SetDestination(new Vector3(-1.06f, 2.03f, -28.95f));
+            //agent.SetDestination(new Vector3(-1.06f, 2.03f, -28.95f));
             agent.destination = new Vector3(-1.06f, 2.03f, -28.95f);
         }
         else if (isSitting)
