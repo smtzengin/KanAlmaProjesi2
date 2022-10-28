@@ -60,14 +60,14 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (Car.instance.isParked)
-        {
+        {        
             PlayerAgent.SetDestination(movePosition.position);
         }
     }
 
     
 
-        private void MyInput()
+    private void MyInput()
     {
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");

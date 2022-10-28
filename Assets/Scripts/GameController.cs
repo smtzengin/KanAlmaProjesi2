@@ -20,6 +20,8 @@ public class GameController : MonoBehaviour
     public bool isKarakterSpawned;
     public int randomNumber;
     public bool imdat = true;
+    public bool isParticleBomb;
+
 
 
     private void Awake()
@@ -32,28 +34,36 @@ public class GameController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    
     }
 
     private void Start()
     {
         isKarakterSpawned = false;
+        isParticleBomb = false;
     }
 
     private void Update()
     {
-        TiriAc();
-
+        StartCoroutine(TiriAc());
     }
 
-    public void TiriAc()
+    IEnumerator TiriAc()
     {
         if(Car.instance.isParked == true)
         {
+            
             kapaliTir.SetActive(false);
+            StartCoroutine(puffEffect(kapaliTir));
+            yield return new WaitForSeconds(1f);
             acikTir.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(puffEffect(sedye1));
             sedye1.SetActive(true);
+            yield return new WaitForSeconds(1f);
+            StartCoroutine(puffEffect(sedye2));
             sedye2.SetActive(true);
-
+            
         }
     }
 
@@ -86,7 +96,27 @@ public class GameController : MonoBehaviour
             imdat = false;
         else
             imdat = true;
+      
+    }
 
+    IEnumerator puffEffect(GameObject obj)
+    {
+        
+        GameObject puffEffect;
+        if (!isParticleBomb)
+        {
+            puffEffect = Instantiate(Resources.Load("puffEffect") as GameObject, obj.transform.position, Quaternion.identity);
+            isParticleBomb = true;
+            yield return new WaitForSeconds(2f);
+            Destroy(puffEffect.gameObject);
+        }
+        
         
     }
+
+    public void TiklamaSeysi()
+    {
+        print("týklýyom ya ben.");
+    }
+
 }

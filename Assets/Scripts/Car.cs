@@ -24,16 +24,16 @@ public class Car : MonoBehaviour
     }
     private void Update()
     {
-        ParkEt();       
+        ParkEt();
     }
- 
+
     public void ParkEt()
     {
         if (!isParked)
         {
             gameObject.transform.position = Vector3.MoveTowards(gameObject.transform.position, hedefYer.position, 25f * Time.deltaTime);
             if (gameObject.transform.position == hedefYer.position)
-            {
+            {                
                 isParked = true;
             }
         }

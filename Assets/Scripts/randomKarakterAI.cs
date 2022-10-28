@@ -47,9 +47,11 @@ public class randomKarakterAI : MonoBehaviour
         if (!isSitting)
         {
             agent.SetDestination(new Vector3(-1.06f, 2.03f, -28.95f));
+            agent.destination = new Vector3(-1.06f, 2.03f, -28.95f);
         }
-        else
+        else if (isSitting)
         {
+            //eðer oturuyorsa gideceði yolu sýfýrlýyo xd
             agent.ResetPath();
         }
     }
@@ -58,17 +60,19 @@ public class randomKarakterAI : MonoBehaviour
     {
         if (!isSitting)
         {
-            agent.SetDestination(new Vector3(5f, 1.3f, -25.734f));
+            //agent.SetDestination(new Vector3(3.7f, 1.3f, -28.734f));
+            agent.destination = new Vector3(3.7f, 1.3f, -28.7f);
         }
-        else
+        else if (isSitting)
         {
             agent.ResetPath();
         }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "SedyeTrigger")
+        if (other.gameObject.tag == "SedyeTrigger")
         {
             print("sað sedye");
 
@@ -80,9 +84,8 @@ public class randomKarakterAI : MonoBehaviour
             animator.SetBool("isSitting", true);
 
 
-
         }
-        if (other.tag == "SedyeTrigger2")
+        if (other.gameObject.tag == "SedyeTrigger2")
         {
             print("sol sedye");
             isSitting = true;
@@ -90,8 +93,7 @@ public class randomKarakterAI : MonoBehaviour
             gameObject.transform.rotation = other.transform.rotation;
 
             
-            animator.SetBool("isSitting", true);
-            
+            animator.SetBool("isSitting", true);           
         }
     }
 
