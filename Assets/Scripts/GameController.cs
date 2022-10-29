@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class GameController : MonoBehaviour
 {
@@ -22,6 +23,13 @@ public class GameController : MonoBehaviour
     public bool imdat = true;
     public bool isParticleBomb;
 
+    public Transform tirTransform;
+    public Transform sagSedyeTransform;
+    public Transform solSedyeTransform;
+
+    public VisualEffect aracPuff;
+    public VisualEffect sedyeSagPuff;
+    public VisualEffect sedyeSolPuff;
 
 
     private void Awake()
@@ -47,6 +55,31 @@ public class GameController : MonoBehaviour
     private void Update()
     {
         StartCoroutine(TiriAc());
+        SetPuffEffects();
+    }
+
+    public void SetPuffEffects()
+    {
+        if(Car.instance.isParked == true)
+        {
+            aracPuff.gameObject.SetActive(true);
+            aracPuff.Play();
+            Destroy(aracPuff.gameObject, 0.5f);
+        }
+        if (sedye1.activeInHierarchy)
+        {
+            sedyeSagPuff.gameObject.SetActive(true);
+            sedyeSagPuff.Play();
+            Destroy(sedyeSagPuff.gameObject, 0.5f);
+
+        }
+        if (sedye2.activeInHierarchy)
+        {
+            sedyeSolPuff.gameObject.SetActive(true);
+            sedyeSolPuff.Play();
+            Destroy(sedyeSolPuff.gameObject, 0.5f);
+
+        }
     }
 
     IEnumerator TiriAc()
@@ -55,7 +88,7 @@ public class GameController : MonoBehaviour
         {
             
             kapaliTir.SetActive(false);
-            StartCoroutine(puffEffect(kapaliTir));
+            //StartCoroutine(puffEffect(kapaliTir));
             yield return new WaitForSeconds(2f);
             acikTir.SetActive(true);
             yield return new WaitForSeconds(1f);
@@ -98,20 +131,20 @@ public class GameController : MonoBehaviour
       
     }
 
-    IEnumerator puffEffect(GameObject obj)
-    {
+    //IEnumerator puffEffect(GameObject obj)
+    //{
         
-        GameObject puffEffect;
-        if (!isParticleBomb)
-        {
-            puffEffect = Instantiate(Resources.Load("puffEffect") as GameObject, obj.transform.position, Quaternion.identity);
-            isParticleBomb = true;
-            yield return new WaitForSeconds(2f);
-            Destroy(puffEffect.gameObject);
-        }
+    //    GameObject puffEffect;
+    //    if (!isParticleBomb)
+    //    {
+    //        puffEffect = Instantiate(Resources.Load("puffEffect") as GameObject, obj.transform.position, Quaternion.identity);
+    //        isParticleBomb = true;
+    //        yield return new WaitForSeconds(2f);
+    //        Destroy(puffEffect.gameObject);
+    //    }
         
         
-    }
+    //}
 
     public void KanTopla()
     {
