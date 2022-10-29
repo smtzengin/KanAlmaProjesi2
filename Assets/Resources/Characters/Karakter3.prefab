@@ -67,7 +67,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.9
-  m_Speed: 20
+  m_Speed: 10
   m_Acceleration: 46.76
   avoidancePriority: 50
   m_AngularSpeed: 999
@@ -92,6 +92,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isSitting: 0
+  isRotating: 0
+  isGoing: 0
 --- !u!136 &7889421666174335763
 CapsuleCollider:
   m_ObjectHideFlags: 0

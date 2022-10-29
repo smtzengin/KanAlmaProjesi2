@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
     
     private void FixedUpdate()
     {
-        if (Car.instance.isParked)
+        if (Car.instance.isParked && GameController.instance.acikTir.gameObject.activeInHierarchy == true)
         {        
             PlayerAgent.SetDestination(movePosition.position);
         }

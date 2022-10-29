@@ -41,6 +41,7 @@ public class GameController : MonoBehaviour
     {
         isKarakterSpawned = false;
         isParticleBomb = false;
+        NPC = Instantiate(NPC2, karakterSpawn.transform.position, Quaternion.identity);
     }
 
     private void Update()
@@ -55,13 +56,11 @@ public class GameController : MonoBehaviour
             
             kapaliTir.SetActive(false);
             StartCoroutine(puffEffect(kapaliTir));
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(2f);
             acikTir.SetActive(true);
             yield return new WaitForSeconds(1f);
-            StartCoroutine(puffEffect(sedye1));
             sedye1.SetActive(true);
             yield return new WaitForSeconds(1f);
-            StartCoroutine(puffEffect(sedye2));
             sedye2.SetActive(true);
             
         }
