@@ -8,6 +8,8 @@ public class randomKarakterAI : MonoBehaviour
     public static randomKarakterAI instance;
     private Animator animator;
     public bool isSitting;
+    public bool isRotating;
+    public bool isGoing;
 
 
     NavMeshAgent agent;
@@ -20,6 +22,8 @@ public class randomKarakterAI : MonoBehaviour
             instance = this;
         }
         isSitting = false;
+        isRotating = true;
+        isGoing = true;
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
@@ -30,6 +34,7 @@ public class randomKarakterAI : MonoBehaviour
 
     private void Update()
     {
+
         //print(GameController.instance.imdat);
         if (Car.instance.isParked)
         {
@@ -39,7 +44,41 @@ public class randomKarakterAI : MonoBehaviour
                 SagSedye();
         }
 
-        
+        if (isSitting)
+        {
+            animator.SetBool("isSitting", true);
+
+            //Quaternion deneme = new Quaternion(gameObject.transform.rotation.w, gameObject.transform.rotation.x , gameObject.transform.rotation.y, gameObject.transform.rotation.z);
+            //gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, gameObject.transform.rotation, 5);
+
+            //Vector3 denemeVec = new Vector3(gameObject.transform.position.x + 50, gameObject.transform.position.y + 50, gameObject.transform.position.z + 50);
+            //gameObject.transform.Rotate(denemeVec, Space.World);
+
+
+            if (isRotating)
+            {
+                Vector3 toRotate = new Vector3(0, 120, 0);
+                if (Vector3.Distance(transform.eulerAngles, toRotate) > 10f)
+                {
+                    transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, toRotate, Time.deltaTime);
+                }
+                else
+                {
+                    transform.eulerAngles = toRotate;
+                    isRotating = false;
+                }
+            }
+
+            if (isGoing)
+            {
+                Vector3 toDirection = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+
+            }
+
+
+
+        }
+
     }
 
     private void SagSedye() 
@@ -78,24 +117,39 @@ public class randomKarakterAI : MonoBehaviour
 
             isSitting = true;
             gameObject.transform.position = other.transform.position;
-            gameObject.transform.rotation = other.transform.rotation;
+            //Quaternion deneme = new Quaternion(gameObject.transform.rotation.w + 50, gameObject.transform.rotation.x + 50, gameObject.transform.rotation.y + 50, gameObject.transform.rotation.z + 50);
+            //gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, deneme, 5);
 
 
-            animator.SetBool("isSitting", true);
+            //Vector3 denemeVec = new Vector3(gameObject.transform.position.x + 50, gameObject.transform.position.y + 50, gameObject.transform.position.z + 50);
+            //gameObject.transform.Rotate(denemeVec, Space.Self);
+
+            //animator.SetBool("isSitting", true);
 
 
-        }
+        }           
         if (other.gameObject.tag == "SedyeTrigger2")
         {
             print("sol sedye");
             isSitting = true;
-            gameObject.transform.position = other.transform.position;
-            gameObject.transform.rotation = other.transform.rotation;
+             gameObject.transform.position = other.transform.position;
+            //Quaternion deneme = new Quaternion(gameObject.transform.rotation.w + 50, gameObject.transform.rotation.x + 50, gameObject.transform.rotation.y + 50, gameObject.transform.rotation.z + 50);
+            //gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation , deneme, 5);
 
-            
-            animator.SetBool("isSitting", true);           
+
+            Vector3 denemeVec = new Vector3(gameObject.transform.position.x + 50, gameObject.transform.position.y + 50, gameObject.transform.position.z + 50);
+            gameObject.transform.Rotate(denemeVec, Space.Self);
+
+            //animator.SetBool("isSitting", true);           
         }
     }
+    private void OnTriggerStay(Collider other)
+    {
+    }
+    private void OnCollisionStay(Collision collision)
+    {
+        print(collision.gameObject.name);
 
+    }
 }
 
