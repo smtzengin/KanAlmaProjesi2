@@ -15,21 +15,6 @@ public class GameManager : MonoBehaviour
         slider.value = 0;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
-
-
-    public void SetMaksKan(int health)
-    {
-        slider.maxValue = health;
-        slider.value = health;
-    }
-
     public void SetKan(float kanMiktari)
     {
         slider.value += kanMiktari;

@@ -118,10 +118,4 @@ public class GameController : MonoBehaviour
     {
         GameManager.instance.SetKan(0.1f);
     }
-
-    public void TiklamaSeysi()
-    {
-        print("týklýyom ya ben.");
-    }
-
 }

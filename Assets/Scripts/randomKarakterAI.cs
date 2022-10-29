@@ -46,7 +46,6 @@ public class randomKarakterAI : MonoBehaviour
 
         if (isSitting)
         {
-            animator.SetBool("isSitting", true);
 
             //Quaternion deneme = new Quaternion(gameObject.transform.rotation.w, gameObject.transform.rotation.x , gameObject.transform.rotation.y, gameObject.transform.rotation.z);
             //gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, gameObject.transform.rotation, 5);
@@ -58,7 +57,7 @@ public class randomKarakterAI : MonoBehaviour
             if (isRotating)
             {
                 Vector3 toRotate = new Vector3(0, 120, 0);
-                if (Vector3.Distance(transform.eulerAngles, toRotate) > 10f)
+                if (Vector3.Distance(transform.eulerAngles, toRotate) > 0.1f)
                 {
                     transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, toRotate, Time.deltaTime);
                 }
@@ -71,7 +70,11 @@ public class randomKarakterAI : MonoBehaviour
 
             if (isGoing)
             {
-                Vector3 toDirection = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                Vector3 toDir = new Vector3(transform.position.x - 1.6f, transform.position.y, transform.position.z);
+
+                transform.position = toDir;
+
+                isGoing = false;
 
             }
 
@@ -114,9 +117,10 @@ public class randomKarakterAI : MonoBehaviour
         if (other.gameObject.tag == "SedyeTrigger")
         {
             print("sað sedye");
+            animator.SetTrigger("isSitting");
 
             isSitting = true;
-            gameObject.transform.position = other.transform.position;
+            //gameObject.transform.position = other.transform.position;
             //Quaternion deneme = new Quaternion(gameObject.transform.rotation.w + 50, gameObject.transform.rotation.x + 50, gameObject.transform.rotation.y + 50, gameObject.transform.rotation.z + 50);
             //gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation, deneme, 5);
 
@@ -131,14 +135,17 @@ public class randomKarakterAI : MonoBehaviour
         if (other.gameObject.tag == "SedyeTrigger2")
         {
             print("sol sedye");
+            animator.SetTrigger("isSitting");
+
+
             isSitting = true;
              gameObject.transform.position = other.transform.position;
             //Quaternion deneme = new Quaternion(gameObject.transform.rotation.w + 50, gameObject.transform.rotation.x + 50, gameObject.transform.rotation.y + 50, gameObject.transform.rotation.z + 50);
             //gameObject.transform.rotation = Quaternion.Slerp(gameObject.transform.rotation , deneme, 5);
 
 
-            Vector3 denemeVec = new Vector3(gameObject.transform.position.x + 50, gameObject.transform.position.y + 50, gameObject.transform.position.z + 50);
-            gameObject.transform.Rotate(denemeVec, Space.Self);
+            //Vector3 denemeVec = new Vector3(gameObject.transform.position.x + 50, gameObject.transform.position.y + 50, gameObject.transform.position.z + 50);
+            //gameObject.transform.Rotate(denemeVec, Space.Self);
 
             //animator.SetBool("isSitting", true);           
         }
