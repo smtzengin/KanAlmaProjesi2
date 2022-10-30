@@ -79,7 +79,7 @@ public class GameController : MonoBehaviour
         yield return new WaitForSeconds(0.25f);
         audioSource.PlayOneShot(Otubus);
 
-        yield return new WaitForSeconds(2.5f);
+        yield return new WaitForSeconds(1.5f);
         if (Car.instance.isParked == true)
         {
             kapaliTir.SetActive(false);
@@ -152,6 +152,7 @@ public class GameController : MonoBehaviour
         StartCoroutine(AddDelay(1f));
         kanAlmaSagBtn.SetActive(false);
         kanAlmaSolBtn.SetActive(false);
+        print("bastim ki");
     }
 
     public IEnumerator AddDelay(float f)
