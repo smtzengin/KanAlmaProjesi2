@@ -38,6 +38,13 @@ public class GameController : MonoBehaviour
     public GameObject kanAlmaSagBtn;
 
 
+    public AudioSource audioSource;
+    public AudioClip Otubus;
+    public AudioClip Siringa;
+    public AudioClip Puff;
+    public AudioClip Alkis;
+
+
     private void Awake()
     {
         if (instance == null)
@@ -53,6 +60,7 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         isKarakterSpawned = false;
         isParticleBomb = false;
         NPC = Instantiate(NPC2, karakterSpawn.transform.position, Quaternion.identity);
@@ -65,13 +73,19 @@ public class GameController : MonoBehaviour
 
     IEnumerator TiriAc()
     {
+        yield return new WaitForSeconds(1.25f);
+        audioSource.PlayOneShot(Otubus);
+
+        yield return new WaitForSeconds(0.25f);
+        audioSource.PlayOneShot(Otubus);
+
         yield return new WaitForSeconds(2.5f);
         if (Car.instance.isParked == true)
         {
-            
             kapaliTir.SetActive(false);
             aracPuff.gameObject.SetActive(true);
             aracPuff.Play();
+            audioSource.PlayOneShot(Puff);
             Destroy(aracPuff.gameObject, 1.5f);
             //StartCoroutine(puffEffect(kapaliTir));
             yield return new WaitForSeconds(0.5f);
@@ -79,12 +93,14 @@ public class GameController : MonoBehaviour
             yield return new WaitForSeconds(1f);
             sedyeSagPuff.gameObject.SetActive(true);
             sedyeSagPuff.Play();
+            audioSource.PlayOneShot(Puff);
             Destroy(sedyeSagPuff.gameObject, 1.5f);
             yield return new WaitForSeconds(0.25f);
             sedye1.SetActive(true);
             yield return new WaitForSeconds(0.5f);
             sedyeSolPuff.gameObject.SetActive(true);
             sedyeSolPuff.Play();
+            audioSource.PlayOneShot(Puff);
             Destroy(sedyeSolPuff.gameObject, 1.5f);
             yield return new WaitForSeconds(0.25f);
             sedye2.SetActive(true);
@@ -131,6 +147,7 @@ public class GameController : MonoBehaviour
 
     public void KanTopla()
     {
+        audioSource.PlayOneShot(Siringa);
         GameManager.instance.SetKan(0.2f);
         StartCoroutine(AddDelay(1f));
         kanAlmaSagBtn.SetActive(false);

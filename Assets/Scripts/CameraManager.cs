@@ -6,6 +6,7 @@ public class CameraManager : MonoBehaviour
 {
     public Camera cam1;
     public Camera cam2;
+    private bool isAlkis = false;
 
 
     private void Update()
@@ -13,6 +14,11 @@ public class CameraManager : MonoBehaviour
         if(GameManager.instance.slider.value >= 1f)
         {
             ChangeCamera();
+            if (!isAlkis)
+            {
+                GameController.instance.audioSource.PlayOneShot(GameController.instance.Alkis);
+                isAlkis = true;
+            }
         }
     }
 

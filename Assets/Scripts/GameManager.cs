@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     public float kanMiktari = 0;
 
+
+
+
     public Slider slider; 
     void Start()
     {
