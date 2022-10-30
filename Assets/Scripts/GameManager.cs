@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    public int kanMiktari = 0;
+    public float kanMiktari = 0;
 
     public Slider slider; 
     void Start()
@@ -15,8 +15,15 @@ public class GameManager : MonoBehaviour
         slider.value = 0;
     }
 
-    public void SetKan(float kanMiktari)
+    public void SetKan(float kan)
     {
-        slider.value += kanMiktari;
+
+        slider.value += kan;
+        kanMiktari += kan;
+    }
+
+    private void Update()
+    {
+        
     }
 }

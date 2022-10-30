@@ -10,6 +10,8 @@ public class randomKarakterAI : MonoBehaviour
     public bool isSitting;
     public bool isRotating;
     public bool isGoing;
+    public bool isLeftSedye;
+    public bool isRightSedye;
 
 
     NavMeshAgent agent;
@@ -27,6 +29,8 @@ public class randomKarakterAI : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
 
+        isRightSedye = false;
+        isLeftSedye = false;
   
 
         
@@ -99,9 +103,11 @@ public class randomKarakterAI : MonoBehaviour
             agent.enabled = false;
             gameObject.transform.position = new Vector3(deneme.position.x +2.3f,deneme.position.y+2.1f,deneme.position.z + 1.7f);
             gameObject.transform.rotation = Quaternion.Euler(0, 40f, 0);
-            
-  
+            isRightSedye = true;
 
+            GameController.instance.kanAlmaSagBtn.SetActive(true);
+            GameController.instance.kanAlmaSolBtn.SetActive(false);
+            
 
         }           
         if (other.gameObject.tag == "SedyeTrigger2")
@@ -112,8 +118,10 @@ public class randomKarakterAI : MonoBehaviour
             agent.enabled = false;
             Transform deneme = other.transform;
             isSitting = true;
-            gameObject.transform.position = new Vector3(deneme.position.x , deneme.position.y + 2.1f, deneme.position.z);
-     
+            gameObject.transform.position = new Vector3(deneme.position.x , deneme.position.y + 1.7f, deneme.position.z);
+            isLeftSedye = true;
+            GameController.instance.kanAlmaSagBtn.SetActive(false);
+            GameController.instance.kanAlmaSolBtn.SetActive(true);
         }
     }
     private void OnTriggerStay(Collider other)
