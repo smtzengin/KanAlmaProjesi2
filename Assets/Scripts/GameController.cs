@@ -50,51 +50,45 @@ public class GameController : MonoBehaviour
         isKarakterSpawned = false;
         isParticleBomb = false;
         NPC = Instantiate(NPC2, karakterSpawn.transform.position, Quaternion.identity);
+        StartCoroutine(TiriAc());
+
     }
 
     private void Update()
     {
-        StartCoroutine(TiriAc());
-        SetPuffEffects();
+
+
     }
 
-    public void SetPuffEffects()
-    {
-        if(Car.instance.isParked == true)
-        {
-            aracPuff.gameObject.SetActive(true);
-            aracPuff.Play();
-            Destroy(aracPuff.gameObject, 0.5f);
-        }
-        if (sedye1.activeInHierarchy)
-        {
-            sedyeSagPuff.gameObject.SetActive(true);
-            sedyeSagPuff.Play();
-            Destroy(sedyeSagPuff.gameObject, 0.5f);
 
-        }
-        if (sedye2.activeInHierarchy)
-        {
-            sedyeSolPuff.gameObject.SetActive(true);
-            sedyeSolPuff.Play();
-            Destroy(sedyeSolPuff.gameObject, 0.5f);
-
-        }
-    }
 
     IEnumerator TiriAc()
     {
-        if(Car.instance.isParked == true)
+        yield return new WaitForSeconds(2.5f);
+        if (Car.instance.isParked == true)
         {
             
             kapaliTir.SetActive(false);
+            aracPuff.gameObject.SetActive(true);
+            aracPuff.Play();
+            Destroy(aracPuff.gameObject, 1.5f);
             //StartCoroutine(puffEffect(kapaliTir));
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(0.5f);
             acikTir.SetActive(true);
             yield return new WaitForSeconds(1f);
+            sedyeSagPuff.gameObject.SetActive(true);
+            sedyeSagPuff.Play();
+            Destroy(sedyeSagPuff.gameObject, 1.5f);
+            yield return new WaitForSeconds(0.25f);
             sedye1.SetActive(true);
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
+            sedyeSolPuff.gameObject.SetActive(true);
+            sedyeSolPuff.Play();
+            Destroy(sedyeSolPuff.gameObject, 1.5f);
+            yield return new WaitForSeconds(0.25f);
             sedye2.SetActive(true);
+
+            
             
         }
     }
