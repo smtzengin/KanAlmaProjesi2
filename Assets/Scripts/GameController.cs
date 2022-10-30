@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.VFX;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -158,5 +159,10 @@ public class GameController : MonoBehaviour
     public IEnumerator AddDelay(float f)
     {
         yield return new WaitForSeconds(f);
+    }
+
+    public void RestartButton()
+    {
+        SceneManager.LoadScene(0);
     }
 }
