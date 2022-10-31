@@ -46,6 +46,7 @@ public class GameController : MonoBehaviour
     public AudioClip Alkis;
 
 
+
     private void Awake()
     {
         if (instance == null)
@@ -66,6 +67,7 @@ public class GameController : MonoBehaviour
         isParticleBomb = false;
         NPC = Instantiate(NPC2, karakterSpawn.transform.position, Quaternion.identity);
         StartCoroutine(TiriAc());
+
 
     }
 
